@@ -1,0 +1,27 @@
+<phpunit
+         bootstrap="../../../../app/autoload.php"
+         backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="true"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         strict="true"
+         verbose="true"
+         timeoutForSmallTests="1"
+         timeoutForMediumTests="5"
+         timeoutForLargeTests="10">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>Unit</directory>
+        </testsuite>
+        <testsuite name="Functional">
+            <directory>Functional</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
