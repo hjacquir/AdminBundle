@@ -1,0 +1,44 @@
+{#{% extends "TwigBundle::layout.html.twig" %}#}
+
+{% block head %}
+    {#<link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />#}
+    {#<link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />#}
+    {% block javascripts %}
+        <script type="text/javascript" src="{{ asset('bundles/hjadmin/js/jquery-1.9.0.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/hjadmin/js/submit.js') }}"></script>
+    {% endblock %}
+{% endblock %}
+
+{% block title 'Admin user' %}
+
+{% block body %}
+    {#{% for flashMessage in app.session.flashbag.get('notice') %}#}
+        {#<div class="flash-message">#}
+            {#<em>Notice</em>: {{ flashMessage }}#}
+        {#</div>#}
+    {#{% endfor %}#}
+{##}
+    {#{% block content_header %}#}
+        {#<ul id="menu">#}
+            {#{% block content_header_more %}#}
+                {#<li><a href="{{ path('_demo') }}">Demo Home</a></li>#}
+            {#{% endblock %}#}
+        {#</ul>#}
+{##}
+        {#<div style="clear: both"></div>#}
+    {#{% endblock %}#}
+{##}
+    {#<div class="block">#}
+        {#{% block content %}{% endblock %}#}
+    {#</div>#}
+{##}
+    {#{% if code is defined %}#}
+        {#<h2>Code behind this page</h2>#}
+        {#<div class="block">#}
+            {#<div class="symfony-content">{{ code|raw }}</div>#}
+        {#</div>#}
+    {#{% endif %}#}
+{% endblock %}
+{% block footer %}
+    Hatim Jacquir 2014
+{% endblock %}

@@ -1,0 +1,3 @@
+hj_admin_default:
+    path: /
+    defaults: { _controller: hj_admin.default_controller:indexAction }

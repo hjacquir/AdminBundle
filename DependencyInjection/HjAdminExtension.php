@@ -8,22 +8,23 @@ namespace Hj\AdminBundle\DependencyInjection;
 
 use \Symfony\Component\Config\FileLocator;
 use \Symfony\Component\DependencyInjection\ContainerBuilder;
-use \Symfony\Component\DependencyInjection\Extension\Extension;
-use \Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class to load your different services
+ * Class to load services
+ *
+ * @todo override database configuration from app/config/parameters.yml file
  */
-class HjAdminExtensions extends Extension
+class HjAdminExtension extends Extension
 {
     /**
-     * @param array            $config
+     * @param array            $configs
      * @param ContainerBuilder $container
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(array(__DIR__ . '/../Resources/config')));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
     }
-
 }

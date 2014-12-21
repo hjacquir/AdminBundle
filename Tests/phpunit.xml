@@ -1,5 +1,5 @@
 <phpunit
-         bootstrap="../../../../app/autoload.php"
+         bootstrap="vendor/autoload.php"
          backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"

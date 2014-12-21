@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="hj_admin.default_controller.class">Hj\AdminBundle\Controller\DefaultController</parameter>
+        <parameter key="hj_admin.user.class">Hj\AdminBundle\Entity\User</parameter>
+        <parameter key="hj_admin.user_type.class">Hj\AdminBundle\Form\Type\UserType</parameter>
+        <parameter key="symfony.response.class">Symfony\Component\HttpFoundation\Response</parameter>
+    </parameters>
+
+    <services>
+        <service id="symfony.response" class="%symfony.response.class%"></service>
+        <service id="hj_admin.user" class="%hj_admin.user.class%"></service>
+        <service id="hj_admin.user_type" class="%hj_admin.user_type.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+        <service id="hj_admin.default_controller" class="%hj_admin.default_controller.class%">
+            <argument type="service" id="symfony.response" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="form.factory" />
+            <argument type="service" id="hj_admin.user_type" />
+            <argument type="service" id="hj_admin.user" />
+            <argument type="service" id="twig" />
+        </service>
+    </services>
+</container>
