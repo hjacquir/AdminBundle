@@ -7,19 +7,36 @@
 
 namespace Hj\AdminBundle\Form\Type;
 
-use Hj\AdminBundle\Entity\Group;
 use Hj\AdminBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class UserType
+ * Class WrappedUserType
  * @package Hj\AdminBundle\Form\Type
  */
-class UserType extends AbstractType
+class WrappedUserType extends AbstractType
 {
-    const NAME = 'userType';
+    /**
+     * @var UserType
+     */
+    private $userType;
+
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @param UserType $userType
+     * @param User $user
+     */
+    public function __construct(UserType $userType, User $user)
+    {
+        $this->userType = $userType;
+        $this->user     = $user;
+    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -27,12 +44,7 @@ class UserType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('label', 'text');
-        $builder->add('groups', 'entity', array(
-            'class' => Group::CLASS_NAME,
-            'multiple' => true,
-            'expanded' => true,
-        ));
+        $this->userType->buildForm($builder, $options);
     }
 
     /**
@@ -40,18 +52,14 @@ class UserType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => User::CLASS_NAME,
-        ));
+        $this->userType->setDefaultOptions($resolver);
     }
 
     /**
-     * Returns the name of this type.
-     *
-     * @return string The name of this type
+     * @return string|void
      */
     public function getName()
     {
-        return self::NAME;
+        return $this->user->getId() . '_' . $this->userType->getName();
     }
 }

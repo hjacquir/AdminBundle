@@ -38,10 +38,12 @@ class User
     private $label;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Group", cascade={"persist"})
-     */
+     * @ORM\ManyToMany(targetEntity="Group")
+     * @ORM\JoinTable(name="user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     *      )
+     **/
     private $groups;
 
     public function __construct()
@@ -84,11 +86,24 @@ class User
     /**
      * @param Group $group
      *
+     * @return bool
+     */
+    public function hasGroup(Group $group)
+    {
+        return $this->groups->contains($group);
+    }
+
+
+    /**
+     * @param Group $group
+     *
      * @return $this
      */
-    public function setGroups(Group $group)
+    public function addGroup(Group $group)
     {
-        $this->groups[] = $group;
+        if (false === $this->hasGroup($group)) {
+            $this->groups->add($group);
+        }
 
         return $this;
     }

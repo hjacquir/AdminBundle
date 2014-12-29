@@ -10,6 +10,7 @@ namespace Hj\AdminBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use Hj\AdminBundle\Entity\User;
 use Hj\AdminBundle\Form\Type\UserType;
+use Hj\AdminBundle\Form\Type\WrappedUserType;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,11 +44,6 @@ class DefaultController extends ContainerAware
     private $userType;
 
     /**
-     * @var User
-     */
-    private $user;
-
-    /**
      * @var Twig_Environment
      */
     private $twig;
@@ -57,7 +53,6 @@ class DefaultController extends ContainerAware
      * @param EntityManager $entityManager
      * @param FormFactory $formFactory
      * @param UserType $userType
-     * @param User $user
      * @param Twig_Environment $twig
      */
     public function __construct(
@@ -65,43 +60,45 @@ class DefaultController extends ContainerAware
         EntityManager $entityManager,
         FormFactory $formFactory,
         UserType $userType,
-        User $user,
         Twig_Environment $twig
     ) {
         $this->response      = $response;
         $this->entityManager = $entityManager;
         $this->formFactory   = $formFactory;
         $this->userType      = $userType;
-        $this->user          = $user;
         $this->twig          = $twig;
     }
 
     /**
      * @param Request $request
+     *
      * @return Response
      */
     public function indexAction(Request $request)
     {
-        $form = $this->formFactory->create($this->userType, $this->user);
-        $form->handleRequest($request);
+        $users = $this->entityManager->getRepository(User::CLASS_NAME)->findAll();
+        $forms = array();
+
+        foreach ($users as $user) {
+            $userType = new WrappedUserType($this->userType, $user);
+            $form = $this->formFactory->create($userType, $user);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted()) {
+                if ($form->isValid()) {
+                    $this->entityManager->persist($user);
+                    $this->entityManager->flush();
+                }
+            }
+            $forms[] = $form->createView();
+        }
 
         $content = $this->twig->render(
             'HjAdminBundle:Default:index.html.twig',
             array(
-                'form' => $form->createView()
+                'forms' => $forms,
             )
         );
-
-        if ($request->isMethod('POST')) {
-            if ($form->isValid()) {
-                $this->entityManager->persist($this->user);
-                $this->entityManager->flush();
-
-                $content = $this->twig->render(
-                    'HjAdminBundle:Default:success.html.twig'
-                );
-            }
-        }
 
         $this->response->setContent($content);
 

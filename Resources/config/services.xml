@@ -21,7 +21,6 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="hj_admin.user_type" />
-            <argument type="service" id="hj_admin.user" />
             <argument type="service" id="twig" />
         </service>
     </services>
