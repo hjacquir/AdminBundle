@@ -7,6 +7,13 @@ A symfony 2 bundle that can be used in backend of your site
 
 Usage
 =======
+create folder namespace hj into :
+
+    src/Hj/
+
+clone this repo into :
+
+    src/Hj/
 
 parameters file config (app/config/parameters.yml) :
 

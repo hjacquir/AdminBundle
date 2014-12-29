@@ -53,6 +53,10 @@ class WrappedUserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $this->userType->setDefaultOptions($resolver);
+
+        $resolver->setDefaults(array(
+            'attr' => array('name' => $this->getName()),
+        ));
     }
 
     /**
