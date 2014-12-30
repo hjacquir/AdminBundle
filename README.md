@@ -39,3 +39,19 @@ add into your routing file (app/config/routing.yml) :
 register the bundle add into : (app/config/AppKernel.php) :
 
     new Hj\AdminBundle\HjAdminBundle();
+
+install assets by running :
+
+    php app/console assets:install
+
+To load fixtures i use DoctrineFixturesBundle : more information here :
+
+    http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html
+
+When you have registered DoctrineFixturesBundle run the command to populate your database with fixtures :
+
+    php app/console doctrine:fixtures:load
+
+Access to your application :
+
+    http://localhost/{projectName}/web/app.php/

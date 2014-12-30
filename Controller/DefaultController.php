@@ -20,6 +20,8 @@ use Twig_Environment;
 /**
  * Class DefaultController
  * @package Hj\AdminBundle\Controller
+ *
+ * @todo add unit and functional test
  */
 class DefaultController extends ContainerAware
 {

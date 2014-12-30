@@ -15,6 +15,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class WrappedUserType
  * @package Hj\AdminBundle\Form\Type
+ *
+ * @todo add unit and functional test
  */
 class WrappedUserType extends AbstractType
 {
@@ -35,7 +37,7 @@ class WrappedUserType extends AbstractType
     public function __construct(UserType $userType, User $user)
     {
         $this->userType = $userType;
-        $this->user     = $user;
+        $this->user = $user;
     }
 
     /**

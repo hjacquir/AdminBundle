@@ -16,6 +16,8 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 /**
  * Class UserType
  * @package Hj\AdminBundle\Form\Type
+ *
+ * @todo add unit and functional test
  */
 class UserType extends AbstractType
 {

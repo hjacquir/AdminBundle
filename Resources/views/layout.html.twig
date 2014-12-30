@@ -1,23 +1,35 @@
 {% block head %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/hjadmin/css/pace.css') }}"/>
+    {% endblock %}
 {% endblock %}
 {% block title 'Admin user' %}
 
 {% block body %}
 {% endblock %}
 {% block javascripts %}
-    <script type="text/javascript" src="{{ asset('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ asset('http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/hjadmin/js/pace.min.js') }}"></script>
     <script>
+        {# script to autosubmit form #}
         function customSubmit(formName) {
             var customParameter = 'form[name=' + formName + ']';
 
             $(customParameter).submit();
         }
 
-        $('input').change(function(e) {
+        $('input').change(function (e) {
             var formName = e.target.form.name;
 
             customSubmit(formName);
         });
+        // pace prograss bar optimize this
+        paceOptions = {
+            elements: false,
+            restartOnPushState: false,
+            restartOnRequestAfter: false
+        }
     </script>
 {% endblock javascripts %}
 {% block footer %}

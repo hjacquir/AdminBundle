@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @todo add unit and functional test
+ *
  * Class User
  * @package Hj\AdminBundle\Entity
  *
