@@ -44,6 +44,10 @@ install assets by running :
 
     php app/console assets:install
 
+create admin_user database on mysql and run this command :
+
+    php app/console doctrine:schema:update --force --dump-sql
+
 To load fixtures i use DoctrineFixturesBundle : more information here :
 
     http://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html
