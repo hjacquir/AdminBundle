@@ -34,7 +34,8 @@ parameters file config (app/config/parameters.yml) :
 add into your routing file (app/config/routing.yml) :
 
     hj_admin:
-        resource: "@HjAdminBundle/Resources/config/routing.yml"
+        resource: .
+        type: extra
 
 register the bundle add into : (app/config/AppKernel.php) :
 
